@@ -19,10 +19,29 @@ document.getElementById('moreRepast').addEventListener('click', () => {
     cloneElement(id, block)
 })
 
+document.getElementById('morePayment').addEventListener('click', () => {
+    const id = 'blockPayment'
+    const block = 'payment'
+
+    cloneElement(id, block)
+})
+
+document.getElementById('moreSales').addEventListener('click', () => {
+    const id = 'blockSales'
+    const block = 'sales'
+
+    cloneElement(id, block)
+})
+document.getElementById('moreOther').addEventListener('click', () => {
+    const id = 'blockOther'
+    const block = 'other'
+
+    cloneElement(id, block)
+})
+
 function cloneElement(id, block) {
     const Div = document.getElementById(id)
     const newDiv = Div.cloneNode(true)
-    const newLabel = document.querySelectorAll('.form-section')
     const global = document.getElementById(block)
     const nbrInput = global.querySelectorAll('input').length
     const newIndex = Math.floor(nbrInput/2) + 1

@@ -1,6 +1,3 @@
-<?php
-    require '../controllers/control_inventaire.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +11,7 @@
 <?php include 'header.php'; ?>
 
 <div class="container mt-5">
-    <h1 class="mb-4 text-center">Liste des Inventaires</h1>
+    <h1 class="mb-4 text-center p-3">Liste des Inventaires</h1>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
@@ -32,7 +29,7 @@
                     <td><?php echo htmlspecialchars($inventory['place']); ?></td>
                     <td><?php echo date("l d F Y", strtotime($inventory['date'])); ?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="details_inventaire.php?id=<?php echo $inventory['id']; ?>">
+                        <a class="btn btn-primary btn-sm" href="details_inventory?src=inventory&id=<?php echo $inventory['id']; ?>">
                             Voir les détails
                         </a>
                     </td>

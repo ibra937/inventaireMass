@@ -6,7 +6,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=sigmar:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title>Inventaire Massamba</title>
 </head>
 <body>
@@ -14,17 +14,17 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">INVENTAIRE MASSAMBA</a>
+            <a class="navbar-brand" href="home.html">INVENTAIRE MASSAMBA</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="Views/formulaire.php">Formulaires</a>
+                        <a class="nav-link" href="form">Formulaires</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Views/inventaire.php">Inventaires</a>
+                        <a class="nav-link" href="inventaire.php">Inventaires</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Statistiques</a>
@@ -52,9 +52,9 @@
             <p class="lead">
                 Entrez les données de l'inventaire et regroupez-les en toute simplicité. Assurez le suivi du flux financier de votre entrepôt.
             </p>
-            <div class="mt-4">
-                <button onclick="window.location.href='Views/formulaire.php'" class="btn btn-primary btn-lg mr-3 mb-3">Formulaire</button>
-                <button onclick="window.location.href='Views/inventaire.php'" class="btn btn-success btn-lg mb-3">Inventaire</button>
+            <div class="mt-4 justify-content-center" >
+                <button onclick="window.location.href='form'" class="btn btn-primary btn-lg mr-3 mb-3">Nouveau</button>
+                <button onclick="window.location.href='inventory?src=index'" class="btn btn-success btn-lg mb-3">Inventaire</button>
             </div>
         </div>
     </div>
