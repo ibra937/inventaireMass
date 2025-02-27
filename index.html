@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Inventaire Massamba</title>
+</head>
+<body>
+<!-- Header Section with Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">INVENTAIRE MASSAMBA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Views/formulaire.php">Formulaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Views/inventaire.php">Inventaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Statistiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Main Section with Image and Intro -->
+<div class="container-fluid mt-5">
+    <div class="row d-flex justify-content-center align-items-center mb-4 mb-md-0">
+        <!-- Image Section -->
+        <div class="col-md-6 col-8 ">
+            <img src="media/inv.png" alt="Inventaire Image" class="img-fluid">
+        </div>
+
+        <!-- Text and Buttons Section -->
+        <div class="col-md-6 col-12 d-flex flex-column justify-content-center text-center text-md-left">
+            <h1 class="display-4 mb-6">BIENVENUE DANS INVENTAIRE MASSAMBA</h1>
+            <p class="lead">
+                Entrez les données de l'inventaire et regroupez-les en toute simplicité. Assurez le suivi du flux financier de votre entrepôt.
+            </p>
+            <div class="mt-4">
+                <button onclick="window.location.href='Views/formulaire.php'" class="btn btn-primary btn-lg mr-3 mb-3">Formulaire</button>
+                <button onclick="window.location.href='Views/inventaire.php'" class="btn btn-success btn-lg mb-3">Inventaire</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Footer Section -->
+<footer class="bg-light py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-0">&copy; 2025 Inventaire Massamba - Tous droits réservés</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
