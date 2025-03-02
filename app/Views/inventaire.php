@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Inventaires</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="app/Views/css.css" rel="stylesheet">
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -37,26 +41,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-        <div>
-            <ul class="pagination justify-content-center">
-                <!-- Bouton "Précédent" -->
-                <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Précédent</a>
-                </li>
-
-                <!-- Afficher les numéros de pages -->
-                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                    </li>
-                <?php endfor; ?>
-
-                <!-- Bouton "Suivant" -->
-                <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Suivant</a>
-                </li>
-            </ul>
-        </div>
+        
 
     </div>
 </div>

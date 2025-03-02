@@ -6,12 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails de l'Inventaire - <?php echo htmlspecialchars($inventory['place']); ?></title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="app/Views/css.css" rel="stylesheet">
 </head>
 <body>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .fade-in {
+        animation: fadeIn 1s forwards;
+    }
+    .fade-out {
+        animation: fadeOut 1s forwards;
+    }
+</style>
+
+
 <?php include 'header.php'; ?>
 
 <div class="container mt-5">
-    <h2 class="text-center p-4"><?php echo htmlspecialchars($inventory['place']); ?> - <?php echo date("l d F Y", strtotime($inventory['date'])); ?></h2>
+
+    <h2 class="text-center p-5"><?php echo htmlspecialchars($inventory['place']); ?> - <?php echo date("l d F Y", strtotime($inventory['date'])); ?></h2>
+
+    <div id="successMessage" class="alert alert-success" style="display: none;">
+        Enregistrement réussi !
+    </div>
 
     <div class="card col-md mt-4 mb2">
         <div class="card-header  row p2  text-center">
@@ -25,8 +52,10 @@
             <span class="col-md-4"><?php echo number_format($solde, 2, ',', ' '); ?> F</span>
         </div>
     </div>
-
-
+    <details class="fade-in">
+    <summary class="fade-in">
+    <h2 class="text-center p-5">Les details de l'inventaire</h2>
+    </summary>
     <h4 class="mt-4">Dépenses</h4>
     <ul class="list-group">
         <?php foreach ($expenses as $expense) : ?>
@@ -87,6 +116,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
+    </details>
 </div>
 
 <?php include 'footer.php'; ?>
@@ -95,5 +125,30 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Récupère les paramètres de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Sélectionne l'élément de message (il doit être présent dans ton HTML)
+            const successMessage = document.getElementById('successMessage');
+
+            // Affiche le message et lance l'animation de fade-in
+            successMessage.style.display = "block";
+            successMessage.classList.add('fade-in');
+
+            // Après 3 secondes, déclenche l'animation de fade-out
+            setTimeout(function(){
+                successMessage.classList.remove('fade-in');
+                successMessage.classList.add('fade-out');
+            }, 3000);
+
+            // Après 4 secondes, masque complètement le message
+            setTimeout(function(){
+                successMessage.style.display = "none";
+            }, 4000);
+        }
+</script>
+
 </body>
 </html>

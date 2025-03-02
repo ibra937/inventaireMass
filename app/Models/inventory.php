@@ -5,10 +5,10 @@ require 'connexionDB.php';
 use PDO;
 
 class inventory{
-        private $pdo;
+        private $conn;
         public function __construct(){
-            global $pdo;
-            $this->pdo = $pdo;
+            global $conn;
+            @$this->pdo = $conn;
         }
         public function allInventories() {
             $sql = "SELECT * FROM inventories ORDER BY created_at DESC";

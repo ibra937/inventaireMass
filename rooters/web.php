@@ -10,7 +10,7 @@
 
     // Définition des routes
     switch ($request) {
-        case '/':
+        case '/admin':
             require 'app/Views/home.html'; // Page d'accueil par défaut
             break;
 
@@ -31,9 +31,25 @@
             require 'app/controllers/control_form.php';
             break;
 
+        case '/users':
+            $to = 'conn';
+            require 'app/controllers/users.php';
+            break;
+
+        case '/users_form':
+            $to = 'form';
+            require 'app/controllers/users.php';
+            break;
+
+        case '/users/form':
+        
+            require 'app/Views/gerant/formUsers.php';
+            break;
+
         default:
             http_response_code(404);
-            require 'Views/404.php'; // Page 404 personnalisée
+             // Page 404 personnalisée
+            require 'app/Views/404.html';
             break;
     }
 

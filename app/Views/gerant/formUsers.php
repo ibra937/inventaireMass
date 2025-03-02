@@ -11,12 +11,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="app/Views/css.css" rel="stylesheet">
 </head>
-<body style="background: #efefef;">
-<?php include 'header.php' ?>
-    <div class="container mt-3">
-        <h1 class="text-center h4 mb-0 p-2 ">Inventaire NourouDarayni</h1>
-        <div class="container mt-3">
-        <h1 class="text-center h4 mt-3 mb-3 p-3 ">Inventaire NourouDarayni</h1>
+<body style="">
+<style>
+    body {
+        background: #efefef;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .fade-in {
+        animation: fadeIn 1s forwards;
+    }
+    .fade-out {
+        animation: fadeOut 1s forwards;
+    }
+</style>
+<div class="container mt-3">
+    <h1 class="text-center h4 mb-3">Inventaire Nouroudarayni</h1>
+    <?php
+        if (@$test == 'success') {
+            echo ("
+                <div id='successMessage' class='alert alert-success' role='alert' style='display: none;'>
+                    Clé d'acces correct
+                </div>
+                ");
+        } else {
+            echo ("
+                <div id='successMessage' class='alert alert-success' style='display: none;'>
+                    Enregistrement réussi !
+                </div>
+            ");
+        }
+    ?>
+
         <form id="myForm" method="POST" action="insert_form" class="text-center">
             <!-- Section Entrepôt et Date -->
             <div class="card mb2 ">
@@ -200,19 +232,46 @@
 
             <!-- Bouton Enregistrer -->
             <div class="text-center mt-3">
-                <input type="hidden" name="src" value="admin">
+                <input type="hidden" name="src" value="gerant">
                 <button type="button" id="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">Enregistrer</button>
             </div>
         </form>
     </div>
 
+</div>
 
-<?php include 'footer.php'; ?>
+<?php include 'app/Views/footer.php'; ?>
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="app/Views/form.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Récupère les paramètres de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Sélectionne l'élément de message (il doit être présent dans ton HTML)
+            const successMessage = document.getElementById('successMessage');
+
+            // Affiche le message et lance l'animation de fade-in
+            successMessage.style.display = "block";
+            successMessage.classList.add('fade-in');
+
+            // Après 3 secondes, déclenche l'animation de fade-out
+            setTimeout(function(){
+                successMessage.classList.remove('fade-in');
+                successMessage.classList.add('fade-out');
+            }, 6000);
+
+            // Après 4 secondes, masque complètement le message
+            setTimeout(function(){
+                successMessage.style.display = "none";
+            }, 7000);
+        }
+    });
+
+</script>
 </body>
 </html>

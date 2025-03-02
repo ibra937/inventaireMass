@@ -77,4 +77,21 @@ document.addEventListener("DOMContentLoaded", function() {
         // Soumettre le formulaire après la confirmation
         document.getElementById('myForm').submit()
     })
+
+    // Récupère les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        // Sélectionne l'élément de message (il doit être présent dans ton HTML)
+        const successMessage = document.getElementById('successMessage');
+        // Affiche le message et lance l'animation de fade-in
+        successMessage.style.display = "block";
+        successMessage.classList.add('fade-in');
+        // Après 3 secondes, déclenche l'animation de fade-out
+        setTimeout(function(){
+            successMessage.classList.remove('fade-in');
+            successMessage.classList.add('fade-out');}, 3000);
+        // Après 4 secondes, masque complètement le message
+        setTimeout(function(){
+            successMessage.style.display = "none";}, 4000);
+    }
 })

@@ -2,16 +2,16 @@
 namespace app\Models;
 require 'connexionDB.php';
 class insert_form {
-    private $pdo;
+    private $conn;
     public function __construct(){
-        global $pdo;
-        $this->pdo = $pdo;
+        global $conn;
+        @$this->pdo = $conn;
     }
     public function insert()
     {
 
         // Récupérer les données
-        $place = $_POST["place"];
+        @$place = $_POST["place"];
         $date = $_POST["date"];
         $risingAmounts = [];
         $risingDescs = [];
@@ -84,11 +84,16 @@ class insert_form {
             $this->insert_sales($salesAmounts, $salesDescs, $inventory_id);
             $this->insert_other($otherAmounts, $otherDescs, $inventory_id);
         }
-        header('Location: form');
+        if ($_POST['src'] == 'admin'){
+            header("Location: inventory?src=inventory&success=true&id=$inventory_id");
+        } else {
+            header("Location: users/form?success=true");
+        }
     }
     function insert_inventory($date, $place) {
         // Insertion des données dans la base de données
         $sql = "INSERT INTO inventories (place, date) VALUES (:place, :date)";
+
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':place', $place);
         $stmt->bindParam(':date', $date);
