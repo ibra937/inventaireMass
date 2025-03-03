@@ -27,6 +27,10 @@
     .fade-out {
         animation: fadeOut 1s forwards;
     }
+    @media (max-width: 768px) {
+      table thead th {
+        font-size: 0.8rem;
+      }
 </style>
 
 
@@ -40,18 +44,26 @@
         Enregistrement réussi !
     </div>
 
-    <div class="card col-md mt-4 mb2">
-        <div class="card-header  row p2  text-center">
-            <h4 class="col-md-4">Total décaissement</h4>
-            <h4 class="col-md-4">Total encaissements</h4>
-            <h4 class="col-md-4">Solde</h4>
-        </div>
-        <div class="card-body  row text-center">
-            <span class="col-md-4"><?php echo number_format($sumOutput, 2,',', ' '); ?> F</span>
-            <span class="col-md-4"><?php echo number_format($sumInput, 2, ',', ' '); ?> F</span>
-            <span class="col-md-4"><?php echo number_format($solde, 2, ',', ' '); ?> F</span>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead class="thead-light">
+            <tr>
+                <th>Décaissement</th>
+                <th>Total encaissemnts</th>
+                <th>Solde</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo number_format($sumOutput, 2, ',', ' '); ?> F</td>
+                <td><?php echo number_format($sumInput, 2, ',', ' '); ?> F</td>
+                <td><?php echo number_format($solde, 2, ',', ' '); ?> F</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
+
     <details class="fade-in">
     <summary class="fade-in">
     <h2 class="text-center p-5">Les details de l'inventaire</h2>
