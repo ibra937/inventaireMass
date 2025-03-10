@@ -88,7 +88,7 @@
                     <div class="row" id="blockRising">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="risingAmount1" id="risingAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="risingAmount1" id="risingAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -110,7 +110,7 @@
                     <div class="row" id="blockTransport">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="transportAmount1" id="transportAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="transportAmount1" id="transportAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -132,7 +132,7 @@
                     <div class="row" id="blockRepast">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="repastAmount1" id="repastAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="repastAmount1" id="repastAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -154,7 +154,7 @@
                     <div class="row" id="blockPayment">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="paymentAmount1" id="paymentAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="paymentAmount1" id="paymentAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -176,7 +176,7 @@
                     <div class="row" id="blockSales">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="salesAmount1" id="salesAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="salesAmount1" id="salesAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -203,7 +203,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="otherDesc1" id="otherDesc1" placeholder="Description: details de la depense">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="otherDesc1" id="otherDesc1" placeholder="Description: details de la depense">
                             </div>
                         </div>
                     </div>

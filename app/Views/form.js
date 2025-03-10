@@ -49,6 +49,28 @@ function rehydrateClones(group, baseDivId) {
     }
 }
 
+function bindInputEvents(element) {
+    element.querySelectorAll('input, select, textarea').forEach(input => {
+        // Si l'input doit accepter uniquement des chiffres, on vérifie la classe "numeric"
+        if (input.classList.contains('numeric')) {
+            input.addEventListener('keypress', function(e) {
+                // Permettre les touches de contrôle (backspace, delete, etc.)
+                const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
+                if (allowedKeys.includes(e.key)) return;
+
+                // Vérifier si la touche pressée n'est pas un chiffre
+                if (!/\d/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        }
+        // Sauvegarde la valeur dans le localStorage
+        input.addEventListener('input', function() {
+            localStorage.setItem(input.id, input.value);
+        });
+    });
+}
+
 // Attache les écouteurs aux boutons "plus" pour ajouter de nouveaux blocs
 document.getElementById('moreRising').addEventListener('click', () => {
     cloneElement('blockRising', 'rising');
@@ -141,3 +163,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
