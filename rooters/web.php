@@ -22,7 +22,15 @@
             require 'app/controllers/inventory.php';
             break;
 
+        case '/inventory_weekly':
+            require 'app/controllers/inventory.php';
+            break;
+
         case '/details_inventory':
+            require 'app/controllers/inventory.php';
+            break;
+
+        case '/details_inventory_weekly':
             require 'app/controllers/inventory.php';
             break;
 

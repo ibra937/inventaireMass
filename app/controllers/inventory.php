@@ -16,3 +16,11 @@ $inventaireModel = new inventory();
     if (isset($_GET['src']) && $_GET['src'] == 'index') {
        $inventaireModel -> allInventories();
     }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'week') {
+        $inventaireModel -> weeklyInventories();
+    }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'inventory_weekly') {
+        $inventaireModel -> details_weekly($_GET['numweek']);
+    }

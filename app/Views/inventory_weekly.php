@@ -17,28 +17,26 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center p-3">Liste des Inventaires</h1>
     <div class="mb-4">
-        <a class="btn btn-dark btn-sm" href="inventory_weekly?src=week">
-            Inventaires Hebdomadaire
+        <a class="btn btn-dark btn-sm" href="inventory?src=index">
+            Inventaires journalier
         </a>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr class="text-center">
-                <th>ID</th>
-                <th>Entrepôt</th>
-                <th>Date</th>
+                <th>Numero de semaines</th>
+                <th>Nbr d'inventaires</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($inventories as $inventory) : ?>
+            <?php foreach ($weeklyInventories as $inventory) : ?>
                 <tr class="text-center">
-                    <td><?php echo htmlspecialchars($inventory['id']); ?></td>
-                    <td><?php echo htmlspecialchars($inventory['place']); ?></td>
-                    <td><?php echo date("l d F Y", strtotime($inventory['date'])); ?></td>
+                    <td>Semaine <?php echo ($inventory['semaine']); ?></td>
+                    <td><?php echo htmlspecialchars($inventory['total_inventaires']); ?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="details_inventory?src=inventory&id=<?php echo $inventory['id']; ?>">
+                        <a class="btn btn-primary btn-sm" href="details_inventory_weekly?src=inventory_weekly&numweek=<?php echo $inventory['semaine']; ?>">
                             Voir les détails
                         </a>
                     </td>
