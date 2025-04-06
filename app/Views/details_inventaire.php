@@ -46,7 +46,7 @@
 
     <div class="table-responsive">
         <table class="table table-bordered text-center">
-            <thead class="thead-light">
+            <thead class="thead-dark">
             <tr>
                 <th>Décaissement</th>
                 <th>Total encaissemnts</th>
@@ -76,7 +76,6 @@
                 <span><?php echo htmlspecialchars($expense['description']); ?></span>
             </li>
         <?php endforeach; ?>
-        <?php echo($totalExpenses); ?>
     </ul>
 
     <h4 class="mt-4">Transports</h4>

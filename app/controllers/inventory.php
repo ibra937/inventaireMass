@@ -24,3 +24,11 @@ $inventaireModel = new inventory();
     if (isset($_GET['src']) && $_GET['src'] == 'inventory_weekly') {
         $inventaireModel -> details_weekly($_GET['numweek']);
     }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'manager') {
+        $inventaireModel -> manager();
+    }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'details_manager') {
+        $inventaireModel -> managerDetails($_GET['numweek']);
+    }

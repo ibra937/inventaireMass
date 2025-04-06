@@ -12,33 +12,54 @@
     <link href="app/Views/css.css" rel="stylesheet">
 </head>
 <body style="background: #efefef;">
+  <style>
+    body {
+        background: #efefef;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .fade-in {
+        animation: fadeIn 1s forwards;
+    }
+    .fade-out {
+        animation: fadeOut 1s forwards;
+    }
+</style>
 <?php include 'header.php' ?>
     <div class="container mt-3">
         <h1 class="text-center h4 mb-0 p-2 ">Inventaire NourouDarayni</h1>
         <div class="container mt-3">
         <h1 class="text-center h4 mt-3 mb-3 p-3 ">Inventaire NourouDarayni</h1>
+        <?php
+            if (@$test == 'success') {
+                echo ("
+                    <div id='successMessage' class='alert alert-success' role='alert' style='display: none;'>
+                        Clé d'acces correct
+                    </div>
+                    ");
+            } else {
+                echo ("
+                    <div id='successMessage' class='alert alert-success' style='display: none;'>
+                        Enregistrement réussi !
+                    </div>
+                ");
+            }
+        ?>
         <form id="myForm" method="POST" action="insert_form" class="text-center">
-            <!-- Section Entrepôt et Date -->
+            <!-- Section Date -->
             <div class="card mb2 ">
                 <div class="card-header p2">
-                    <h3 class="h6 mb-0">Date et Place</h3>
+                    <h3 class="h6 mb-0">Date</h3>
                 </div>
                 <div class="card-body p-2">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <select class="form-control form-control-sm" name="place" id="place" required>
-                                    <option value="" disabled selected>--Selectionner un entrepot--</option>
-                                    <option value="NORD FOIRE">NORD FOIRE</option>
-                                    <option value="BANLIEU">BANLIEU</option>
-                                    <option value="USA">USA</option>
-                                    <option value="TOUBA">TOUBA</option>
-                                    <option value="LOUGA">LOUGA</option>
-                                    <option value="THIES">THIES</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <input type="date" class="form-control form-control-sm" name="date" id="date" required placeholder="Date">
                             </div>
@@ -47,137 +68,53 @@
                 </div>
             </div>
 
-            <!-- Section Dépenses -->
+            <!-- Section Entree -->
             <div class="card mb-2 mt-2">
                 <div class="card-header p-2">
-                    <h3 class="h6 mb-0">Dépenses</h3>
+                    <h3 class="h6 mb-0">Solde</h3>
                 </div>
-                <div class="card-body p-2" id="rising">
-                    <div class="row" id="blockRising">
+                <div class="card-body p-2" id="into">
+                    <div class="row" id="blockInto">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="risingAmount1" id="risingAmount1" placeholder="Montant: 0.000">
+                                <input type="text" class="form-control form-control-sm" name="intoAmount1" id="intoAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="risingDesc1" id="risingDesc1" placeholder="Description: details de la depense">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <button  type="button" class="btn btn-sm float-right" id="moreRising">+</button>
-            </div>
-
-            <!-- Section Transport -->
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h3 class="h6 mb-0">Transport</h3>
-                </div>
-                <div class="card-body p-2" id="transport">
-                    <div class="row" id="blockTransport">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="transportAmount1" id="transportAmount1" placeholder="Montant: 0.000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="transportDesc1" id="transportDesc1" placeholder="Description: details de la depense">
+                                <input type="text" class="form-control form-control-sm" name="intoDesc1" id="intDesc1" placeholder="Description: details du solde">
                             </div>
                         </div>
                     </div>
                 </div>
-                    <button type="button" class="btn btn-sm float-right" id="moreTransport">+</button>
+                    <button  type="button" class="btn btn-sm float-right" id="moreInto">+</button>
             </div>
 
-            <!-- Section Repas -->
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h3 class="h6 mb-0">Repas</h3>
-                </div>
-                <div class="card-body p-2" id="repast">
-                    <div class="row" id="blockRepast">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="repastAmount1" id="repastAmount1" placeholder="Montant: 0.000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="repastDesc1" id="repastDesc1" placeholder="Description: details de la depense">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <button type="button" class="btn btn-sm float-right" id="moreRepast">+</button>
-            </div>
 
-            <!-- Section payement -->
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h3 class="h6 mb-0">Payements</h3>
-                </div>
-                <div class="card-body p-2" id="payment">
-                    <div class="row" id="blockPayment">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="paymentAmount1" id="paymentAmount1" placeholder="Montant: 0.000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="paymentDesc1" id="paymentDesc1" placeholder="Description: details de la depense">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <button type="button" class="btn btn-sm float-right" id="morePayment">+</button>
-            </div>
-
-            <!-- Section Ventes -->
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h3 class="h6 mb-0">Ventes</h3>
-                </div>
-                <div class="card-body p-2" id="sales">
-                    <div class="row" id="blockSales">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="salesAmount1" id="salesAmount1" placeholder="Montant: 0.000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="salesDesc1" id="salesDesc1" placeholder="Description: details de la depense">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <button type="button" class="btn btn-sm float-right" id="moreSales">+</button>
-            </div>
-
-            <!-- Section Autres -->
+            <!-- Section Sortie -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="h6 mb-0">Autres</h3>
+                    <h3 class="h6 mb-0">Depenses</h3>
                 </div>
-                <div class="card-body p-2" id="other">
-                    <div class="row" id="blockOther">
+                <div class="card-body p-2" id="outa">
+                    <div class="row" id="blockOuta">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="otherAmount1" id="otherAmount1" placeholder="Montant: 0.000">
+                                <input type="text" class="form-control form-control-sm" name="outaAmount1" id="outaAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="otherDesc1" id="otherDesc1" placeholder="Description: details de la depense">
+                                <input type="text" class="form-control form-control-sm" name="outaDesc1" id="outaDesc1" placeholder="Description: details de la depense">
                             </div>
                         </div>
                     </div>
                 </div>
-                    <button type="button" class="btn btn-sm float-right" id="moreOther">+</button>
+                    <button type="button" class="btn btn-sm float-right" id="moreOuta">+</button>
             </div>
+
+
+            <!-- message de confirmation -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -213,6 +150,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="app/Views/form.js"></script>
+<script src="app/Views/admin/formAdmin.js"></script>
 </body>
 </html>

@@ -23,19 +23,45 @@
     <h3 class="text-center p-5"><? echo($place) ?></h3>
 
     <div class="table-responsive">
-        <table class="table table-bordered text-center">
+    <table class="table table-bordered text-center">
             <thead class="thead-light">
             <tr>
-                <th>Décaissement</th>
-                <th>Total encaissemnts</th>
-                <th>Solde</th>
+                <th>Catégorie</th>
+                <th>Montant (F CFA)</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             <tr>
+                <td>DÉPENSE</td>
+                <td><?php echo number_format($data['totalExpenses'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr>
+                <td>TRANSPORT</td>
+                <td><?php echo number_format($data['totalTransports'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr>
+                <td>REPAS</td>
+                <td><?php echo number_format($data['TotalRepasts'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr>
+                <td>PAYEMENT</td>
+                <td><?php echo number_format($data['TotalPayments'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr>
+                <td>VENTE</td>
+                <td><?php echo number_format($data['TotalSales'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr>
+                <td>AUTRE</td>
+                <td><?php echo number_format($data['TotalOthers'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr class="font-weight-bold text-success">
+                <td>TOTAL DECAISSEMENT</td>
                 <td><?php echo number_format($data['sumOutput'], 2, ',', ' '); ?> F</td>
+            </tr>
+            <tr class="font-weight-bold text-success">
+                <td>TOTAL ENCAISSEMENT</td>
                 <td><?php echo number_format($data['sumInput'], 2, ',', ' '); ?> F</td>
-                <td><?php echo number_format($data['soldeWeek'], 2, ',', ' '); ?> F</td>
             </tr>
             </tbody>
         </table>

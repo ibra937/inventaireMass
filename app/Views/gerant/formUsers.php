@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="app/Views/css.css" rel="stylesheet">
 </head>
-<body style="">
+<body>
 <style>
     body {
         background: #efefef;
@@ -198,12 +198,12 @@
                     <div class="row" id="blockOther">
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="text" class="form-control form-control-sm" name="otherAmount1" id="otherAmount1" placeholder="Montant: 0.000">
+                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="otherAmount1" id="otherAmount1" placeholder="Montant: 0.000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-2">
-                                <input type="number" inputmode="numeric" class="form-control form-control-sm" name="otherDesc1" id="otherDesc1" placeholder="Description: details de la depense">
+                                <input type="text" class="form-control form-control-sm" name="otherDesc1" id="otherDesc1" placeholder="Description: details de la depense">
                             </div>
                         </div>
                     </div>

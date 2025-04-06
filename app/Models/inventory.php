@@ -19,21 +19,48 @@ class inventory{
             require 'app/Views/inventaire.php';
         }
         public function weeklyInventories() {
-            $sql = "SELECT WEEK(date) AS semaine, COUNT(*) AS total_inventaires 
-                    FROM inventories 
-                    GROUP BY semaine 
+            $sql = "SELECT WEEK(date, 1) AS semaine, COUNT(*) AS total_inventaires
+                    FROM inventories
+                    GROUP BY semaine
                     ORDER BY semaine DESC";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             $weeklyInventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
             require 'app/Views/inventory_weekly.php';
         }
-        public function details_weekly($num) {
-            $sql = "UPDATE inventories SET week = WEEK(date);";
+        public function manager() {
+            $sql = "SELECT WEEK(date, 1) AS semaine, COUNT(*) AS total_inventaires
+                    FROM inventory_admin
+                    GROUP BY semaine
+                    ORDER BY semaine DESC";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
-            
+            $weeklyInventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            require 'app/Views/admin/manager.php';
+        }
+        public function managerDetails($num) {
+            $sql = "SELECT * FROM inventory_admin WHERE WEEK(date, 1) = :semaine";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':semaine', $num);
+            $stmt->execute();
+            $weeklyInventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $sumOutput = 0;
+            $sumInput = 0;
+            foreach ($weeklyInventories as $inventory) {
+              $sumOutput += $inventory['outaAmount'];
+              $sumInput += $inventory['intoAmount'];
+            }
+            $solde = $sumInput - $sumOutput;
+
+            require 'app/Views/admin/managerDetails.php';
+        }
+        public function details_weekly($num) {
+            $sql = "UPDATE inventories SET week = WEEK(date, 1);";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
             $places = ['NORD FOIRE', 'BANLIEU', 'LOUGA', 'USA', 'TOUBA', 'THIES'];
             $result = [];
             foreach( $places as $place ) {
@@ -43,15 +70,21 @@ class inventory{
                 $totalPayments = $this->getPaymentsWeek($num, $place);
                 $totalSales = $this->getSalesWeek($num, $place);
                 $totalOthers = $this->getOthersWeek($num, $place);
-                
-                $sumOutput = $totalExpenses + $totalRepasts + $totalTransports + $totalOthers;
+
+                $sumOutput = $totalExpenses + $totalRepasts + $totalTransports;
                 $sumInput = $totalPayments + $totalSales;
-                $soldeWeek = $sumInput - $sumOutput;
+                //$soldeWeek = $sumInput - $sumOutput;
 
                 $result[$place] = [
+                    'totalExpenses' => $totalExpenses,
+                    'totalTransports' => $totalTransports,
+                    'TotalRepasts' => $totalRepasts,
+                    'TotalPayments' => $totalPayments,
+                    'TotalSales' => $totalSales,
+                    'TotalOthers' => $totalOthers,
                     'sumOutput' => $sumOutput,
                     'sumInput' => $sumInput,
-                    'soldeWeek' => $soldeWeek
+                    //'soldeWeek' => $soldeWeek
                 ];
             }
             require 'app/Views/details_week.php';
@@ -95,7 +128,7 @@ class inventory{
                 $totalOthers = $totalOthers + $other['amount'];
             }
 
-            $sumOutput = $totalExpenses + $totalTransports + $totalRepasts + $totalOthers;
+            $sumOutput = $totalExpenses + $totalTransports + $totalRepasts;
             $sumInput = $totalPayments + $totalSales;
             $solde = $sumInput - $sumOutput;
 

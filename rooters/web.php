@@ -50,8 +50,16 @@
             break;
 
         case '/users/form':
-        
+
             require 'app/Views/gerant/formUsers.php';
+            break;
+
+        case '/manager':
+            require 'app/controllers/inventory.php';
+            break;
+
+        case '/details_manager':
+            require 'app/controllers/inventory.php';
             break;
 
         default:
@@ -60,4 +68,3 @@
             require 'app/Views/404.html';
             break;
     }
-

@@ -12,31 +12,24 @@
     <link href="app/Views/css.css" rel="stylesheet">
 </head>
 <body>
-<?php include 'header.php'; ?>
+<?php include 'app/Views/header.php'; ?>
 
 <div class="container mt-5">
-    <h1 class="mb-4 text-center p-3">Liste des Inventaires</h1>
-    <div class="mb-4">
-        <a class="btn btn-dark btn-sm" href="inventory_weekly?src=week">
-            Hebdomadaire
-        </a>
-    </div>
+    <h1 class="mb-4 text-center p-3">Liste du manager</h1>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr class="text-center">
-                <th>Entrepôt</th>
-                <th>Date</th>
+                <th>Numero de semaine</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($inventories as $inventory) : ?>
+            <?php foreach ($weeklyInventories as $inventory) : ?>
                 <tr class="text-center">
-                    <td><?php echo htmlspecialchars($inventory['place']); ?></td>
-                    <td><?php echo date("l d F Y", strtotime($inventory['date'])); ?></td>
+                    <td>Semaine <?php echo ($inventory['semaine']); ?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="details_inventory?src=inventory&id=<?php echo $inventory['id']; ?>">
+                        <a class="btn btn-primary btn-sm" href="details_manager?src=details_manager&numweek=<?php echo $inventory['semaine']; ?>">
                             Voir les détails
                         </a>
                     </td>
@@ -49,7 +42,7 @@
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'app/Views/footer.php'; ?>
 
 <!-- Bootstrap JS et dépendances -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

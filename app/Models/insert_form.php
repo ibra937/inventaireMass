@@ -7,9 +7,7 @@ class insert_form {
         global $conn;
         @$this->pdo = $conn;
     }
-    public function insert()
-    {
-
+    public function insert() {
         // Récupérer les données
         @$place = $_POST["place"];
         $date = $_POST["date"];
@@ -84,11 +82,42 @@ class insert_form {
             $this->insert_sales($salesAmounts, $salesDescs, $inventory_id);
             $this->insert_other($otherAmounts, $otherDescs, $inventory_id);
         }
-        if ($_POST['src'] == 'admin'){
-            header("Location: inventory?src=inventory&success=true&id=$inventory_id");
-        } else {
-            header("Location: users/form?success=true");
+        header("Location: users/form?success=true");
+    }
+    public function insertAdmin() {
+      $date = $_POST['date'];
+      $intoAmount = [];
+      $intoDesc = [];
+      $outaAmount = [];
+      $outaDesc = [];
+
+      foreach ($_POST as $key => $value) {
+        if (strpos($key, 'intoAmount') === 0) {
+          $intoAmount[] = $value;
         }
+        if (strpos($key, 'intoDesc') === 0) {
+          $intoDesc[] = $value;
+        }
+        if (strpos($key, 'outaAmount') === 0) {
+          $outaAmount[] = $value;
+        }
+        if (strpos($key, 'outaDesc') === 0) {
+          $outaDesc[] = $value;
+        }
+      }
+      $sql = "INSERT INTO inventory_admin (date, intoAmount, intoDesc, outaAmount, outaDesc)
+            VALUES (:date, :intoAmount, :intoDesc, :outaAmount, :outaDesc)";
+            $stmt = $this->pdo->prepare($sql);
+            // Boucle pour insérer les données
+        foreach ($intoAmount as $key => $value) {
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':intoAmount', $intoAmount[$key]);
+            $stmt->bindParam(':intoDesc', $intoDesc[$key]);
+            $stmt->bindParam(':outaAmount', $outaAmount[$key]);
+            $stmt->bindParam(':outaDesc', $outaDesc[$key]);
+            $stmt->execute();
+        }
+        header("Location: form?success=true");
     }
     function insert_inventory($date, $place) {
         // Insertion des données dans la base de données
@@ -100,8 +129,6 @@ class insert_form {
         if ($stmt -> execute()) {
             $inventory_id = $this->pdo->lastInsertId();
             return $inventory_id;
-            echo($date);
-            echo($place);
         } else {
             echo "Erreur : " . $stmt->errorInfo()[2];
         }
@@ -119,7 +146,6 @@ class insert_form {
                 ':description' => $risingDescs[$index]
             ]);
         }
-        // Afficher les données récupérées
     }
     function insert_transport($transportAmounts, $transportDescs, $inventory_id) {
         // Insertion des données dans la base de données
