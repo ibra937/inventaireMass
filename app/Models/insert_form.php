@@ -82,7 +82,7 @@ class insert_form {
             $this->insert_sales($salesAmounts, $salesDescs, $inventory_id);
             $this->insert_other($otherAmounts, $otherDescs, $inventory_id);
         }
-        header("Location: users/form?success=true");
+        header("Location: users?success=true");
     }
     public function insertAdmin() {
       $date = $_POST['date'];

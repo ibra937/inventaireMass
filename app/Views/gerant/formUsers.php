@@ -63,6 +63,7 @@
                                     <option value="" disabled selected>--Selectionner un entrepot--</option>
                                     <option value="NORD FOIRE">NORD FOIRE</option>
                                     <option value="BANLIEU">BANLIEU</option>
+                                    <option value="LAVAGE MBOUR">LAVAGE MBOUR</option>
                                     <option value="USA">USA</option>
                                     <option value="TOUBA">TOUBA</option>
                                     <option value="LOUGA">LOUGA</option>

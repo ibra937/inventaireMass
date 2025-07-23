@@ -18,7 +18,13 @@
     <h1 class="mb-4 text-center p-3">Liste des Inventaires</h1>
     <div class="mb-4">
         <a class="btn btn-dark btn-sm" href="inventory?src=index">
-            Inventaires journalier
+            Journalier
+        </a>
+        <a class="btn btn-primary btn-sm disabled" href="inventory_weekly?src=week">
+            Hebdomadaire
+        </a>
+        <a class="btn btn-dark btn-sm" href="inventory_month?src=month">
+            Mensuel
         </a>
     </div>
     <div class="table-responsive">

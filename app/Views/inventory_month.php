@@ -17,13 +17,13 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center p-3">Liste des Inventaires</h1>
     <div class="mb-4">
-        <a class="btn btn-primary btn-sm disabled" href="inventory?src=index">
+        <a class="btn btn-dark btn-sm" href="inventory?src=index">
             Journalier
         </a>
         <a class="btn btn-dark btn-sm" href="inventory_weekly?src=week">
             Hebdomadaire
         </a>
-        <a class="btn btn-dark btn-sm" href="inventory_month?src=month">
+        <a class="btn btn-primary btn-sm disabled" href="inventory_month?src=month">
             Mensuel
         </a>
     </div>
@@ -31,18 +31,18 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr class="text-center">
-                <th>Entrepôt</th>
-                <th>Date</th>
+                <th>Numero de semaines</th>
+                <th>Nbr d'inventaires</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($inventories as $inventory) : ?>
+            <?php foreach ($weeklyInventories as $inventory) : ?>
                 <tr class="text-center">
-                    <td><?php echo htmlspecialchars($inventory['place']); ?></td>
-                    <td><?php echo date("l d F Y", strtotime($inventory['date'])); ?></td>
+                    <td><h5><?php echo ($inventory['mois_nom']); ?></h5></td>
+                    <td><?php echo htmlspecialchars($inventory['total_inventaires']); ?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="details_inventory?src=inventory&id=<?php echo $inventory['id']; ?>">
+                        <a class="btn btn-primary btn-sm" href="details_inventory_month?src=inventory_month&nummonth=<?php echo$inventory['mois']; ?>&mois=<?php echo $inventory['mois_nom']; ?>">
                             Voir les détails
                         </a>
                     </td>

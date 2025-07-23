@@ -29,6 +29,18 @@ class inventory{
 
             require 'app/Views/inventory_weekly.php';
         }
+        public function monthInventories() {
+            $sql = "SELECT MONTH(date) AS mois, DATE_FORMAT(date, '%M') AS mois_nom, COUNT(*) AS total_inventaires
+                    FROM inventories
+                    GROUP BY mois
+                    ORDER BY mois DESC";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $weeklyInventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+           
+            require 'app/Views/inventory_month.php';
+        }
         public function manager() {
             $sql = "SELECT WEEK(date, 1) AS semaine, COUNT(*) AS total_inventaires
                     FROM inventory_admin
@@ -61,7 +73,7 @@ class inventory{
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
 
-            $places = ['NORD FOIRE', 'BANLIEU', 'LOUGA', 'USA', 'TOUBA', 'THIES'];
+            $places = ['NORD FOIRE', 'BANLIEU', 'MBOUR 1', 'MBOUR 2', 'LOUGA', 'USA', 'TOUBA', 'THIES'];
             $result = [];
             foreach( $places as $place ) {
                 $totalExpenses = $this->getExpensesWeek($num, $place);
@@ -88,6 +100,49 @@ class inventory{
                 ];
             }
             require 'app/Views/details_week.php';
+        }
+        public function details_month($num) {
+            $sql = "UPDATE inventories SET month = MONTH(date)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            $places = ['NORD FOIRE', 'BANLIEU', 'LAVAGE MBOUR', 'LOUGA', 'USA', 'TOUBA', 'THIES'];
+            $result = [];
+            $table2 = 'inventories';
+            foreach( $places as $place ) {
+                $totalExpenses = $this->getMonth($num, $place, 'expenses', $table2);
+                $totalTransports = $this->getMonth($num, $place, 'transports', $table2);
+                $totalRepasts = $this->getMonth($num, $place, 'repasts', $table2);
+                $totalPayments = $this->getMonth($num, $place, 'payments', $table2);
+                $totalSales = $this->getMonth($num, $place, 'sales', $table2);
+                $totalOthers = $this->getMonth($num, $place, 'others', $table2);
+
+                $sumOutput = $totalExpenses + $totalRepasts + $totalTransports;
+                $sumInput = $totalPayments + $totalSales;
+                $soldeWeek = $sumInput - $sumOutput;
+
+                $result[$place] = [
+                    'totalExpenses' => $totalExpenses,
+                    'totalTransports' => $totalTransports,
+                    'TotalRepasts' => $totalRepasts,
+                    'TotalPayments' => $totalPayments,
+                    'TotalSales' => $totalSales,
+                    'TotalOthers' => $totalOthers,
+                    'sumOutput' => $sumOutput,
+                    'sumInput' => $sumInput,
+                    'soldeWeek' => $soldeWeek
+                ];
+            }
+            require 'app/Views/details_month.php';
+        }
+        public function getMonth($week, $place, $table1, $table2) {
+            // 1. Récupérer la somme des dépenses (expenses)
+            $sqlExpenses = "SELECT SUM(e.amount) AS total FROM $table1 e JOIN $table2 i ON e.inventory_id = i.id
+            WHERE i.month = ? AND i.place = ?";
+            $stmt = $this->pdo->prepare($sqlExpenses);
+            $stmt->execute([$week, $place]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['total'] ?? 0;
         }
         public function showInventory($inventory_id) {
             $inventory = $this->getInventories($inventory_id);

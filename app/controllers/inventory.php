@@ -32,3 +32,11 @@ $inventaireModel = new inventory();
     if (isset($_GET['src']) && $_GET['src'] == 'details_manager') {
         $inventaireModel -> managerDetails($_GET['numweek']);
     }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'month') {
+        $inventaireModel -> monthInventories();
+    }
+
+    if (isset($_GET['src']) && $_GET['src'] == 'inventory_month') {
+        $inventaireModel -> details_month($_GET['nummonth']);
+    }
