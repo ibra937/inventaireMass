@@ -34,6 +34,10 @@
             require 'app/controllers/inventory.php';
             break;
 
+        case '/details_inventory_month':
+            require 'app/controllers/inventory.php';
+            break;
+
         case '/insert_form':
 
             require 'app/controllers/control_form.php';
@@ -60,6 +64,14 @@
 
         case '/details_manager':
             require 'app/controllers/inventory.php';
+            break;
+
+        case '/inventory_month':
+            require 'app/controllers/inventory.php';
+            break;
+
+        case '/lavage':
+            require 'app/controllers/c_lavage.php';
             break;
 
         default:

@@ -14,6 +14,9 @@
                         <a class="nav-link" href="inventory?src=index">Inventaires</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="lavage?src=index">Lavage</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="manager?src=manager">Manager</a>
                     </li>
                 </ul>

@@ -35,12 +35,7 @@
             echo (
                     "<div class='alert alert-danger alert-dismissible fade show' id='successMessage' role='alert'>Clé d'acces incorrect</div>"
             );
-        } else {
-            echo ("
-                <div id='successMessage' class='alert alert-success' style='display: none;'>
-                    Enregistrement réussi !
-                </div>
-            ");
+
         }
     ?>
     <!-- Formulaire d'inscription -->
